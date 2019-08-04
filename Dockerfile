@@ -1,7 +1,4 @@
-FROM ubuntu
-RUN echo "Run One"
-RUN echo "RUN TWO"
-ENTRYPOINT ["echo","Hello From EP"]
-CMD ["Echo From Image"]
-CMD [" Echo From Latest"]
-RUN echo "RUN Three"
+FROM tomcat:8.0.20-jre8
+RUN sed -i '/<\/tomcat-users>/ i\<user username="admin" password="password" roles="admin-gui,manager-gui"/>' /usr/local/tomcat/conf/tomcat-users.xml
+#COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY java-web-app.war /usr/local/tomcat/webapps/gradle-web-app.war
